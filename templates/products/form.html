@@ -1,8 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="card p-4">
-  <h4>{{ "Add Product" if mode=="create" else "Edit Product" }}</h4>
-  <form method="post" enctype="multipart/form-data">{% csrf_token %}
+<div class="card p-4 shadow-sm">
+  <h4>
+    {% if mode == "create" %}
+      Add Product
+    {% else %}
+      Edit Product
+    {% endif %}
+  </h4>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-dark">Save</button>
     <a class="btn btn-outline-secondary" href="/products/">Back</a>
