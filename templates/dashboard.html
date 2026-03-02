@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-md-3"><div class="card p-3"><div class="text-muted">Users</div><h3>{{ total_users }}</h3></div></div>
+  <div class="col-md-3"><div class="card p-3"><div class="text-muted">Students</div><h3>{{ total_students }}</h3></div></div>
+  <div class="col-md-3"><div class="card p-3"><div class="text-muted">Products</div><h3>{{ total_products }}</h3></div></div>
+  <div class="col-md-3"><div class="card p-3"><div class="text-muted">Highest Price</div><h6>{{ highest_price }}</h6></div></div>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+  <a class="btn btn-outline-dark" href="/students/">Students</a>
+  <a class="btn btn-outline-dark" href="/products/">Products</a>
+</div>
+{% endblock %}

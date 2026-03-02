@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="d-flex justify-content-between">
+  <h4>Students</h4>
+  <a class="btn btn-dark" href="/students/new/">Add</a>
+</div>
+
+<form class="row g-2 my-2" method="get">
+  <div class="col-md-4"><input class="form-control" name="q" value="{{ q }}" placeholder="Search name/email"></div>
+  <div class="col-md-2"><button class="btn btn-outline-dark w-100">Search</button></div>
+</form>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead><tr><th>Name</th><th>Email</th><th>Dept</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for s in page_obj %}
+      <tr>
+        <td>{{ s.name }}</td><td>{{ s.email }}</td><td>{{ s.dept }}</td>
+        <td class="d-flex gap-2">
+          <a class="btn btn-sm btn-outline-dark" href="/students/{{s.id}}/edit/">Edit</a>
+          <form method="post" action="/students/{{s.id}}/delete/">{% csrf_token %}
+            <button class="btn btn-sm btn-outline-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+<nav>
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?q={{q}}&page={{page_obj.previous_page_number}}">Prev</a></li>
+    {% endif %}
+    <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?q={{q}}&page={{page_obj.next_page_number}}">Next</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}

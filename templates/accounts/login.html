@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card p-4 shadow-sm">
+      <h4 class="mb-3">Login</h4>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark w-100">Login</button>
+      </form>
+      <div class="small mt-3">
+        No account? <a href="/accounts/register/">Register</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

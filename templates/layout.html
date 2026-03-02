@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Mini CRM</title>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-dark px-3">
+  <a class="navbar-brand" href="/dashboard/">MiniCRM</a>
+  <div class="d-flex gap-2">
+    {% if user.is_authenticated %}
+      <span class="text-white-50 align-self-center small">{{ user.username }} ({{ user.role }})</span>
+      <a class="btn btn-outline-light btn-sm" href="/accounts/logout/">Logout</a>
+    {% else %}
+      <a class="btn btn-outline-light btn-sm" href="/accounts/login/">Login</a>
+    {% endif %}
+  </div>
+</nav>
+
+<div class="container my-4">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>
