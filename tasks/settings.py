@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-iq2fqx6&dx#_-h0*)gw!23e_h$+2-%*xlw&85any)m&e7yp2d&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["five0taskproject.onrender.com"]
 
 
 # Application definition
@@ -132,3 +132,12 @@ AUTH_USER_MODEL = "accounts.User"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+import os
+
+if os.environ.get("RENDER") == "true":
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@gmail.com", "admin123")
